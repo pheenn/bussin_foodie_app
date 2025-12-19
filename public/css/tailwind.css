@@ -1,0 +1,163 @@
+/* Custom CSS additions for Bussin' Foodie Dashboard */
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Utility classes */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+/* Status indicator dots */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-dot.pending { background-color: #f59e0b; }
+.status-dot.confirmed { background-color: #3b82f6; }
+.status-dot.preparing { background-color: #8b5cf6; }
+.status-dot.ready { background-color: #a855f7; }
+.status-dot.completed { background-color: #10b981; }
+.status-dot.cancelled { background-color: #ef4444; }
+
+/* Gradient text */
+.text-gradient {
+    background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card hover effects */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for main content */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+    .mobile-padding {
+        padding-left: 56px; /* Account for hamburger button */
+    }
+    
+    .mobile-center {
+        text-align: center;
+    }
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 767px) {
+    button, 
+    a, 
+    [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    input, 
+    select, 
+    textarea {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+    }
+}
+
+/* Height utilities */
+.h-full-screen {
+    height: 100vh;
+    height: -webkit-fill-available;
+}
+
+.min-h-full-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+/* Flex utilities */
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.flex-shrink {
+    flex-shrink: 1;
+}
+
+/* Sticky sidebar for desktop */
+@media (min-width: 768px) {
+    .sticky-sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .sidebar {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        color: #000;
+    }
+}
