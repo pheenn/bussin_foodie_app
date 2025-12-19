@@ -7,7 +7,7 @@
     
     <div class="px-4 py-6 max-w-4xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="/products/store" enctype="multipart/form-data" id="productForm">
+            <form method="POST" action="<?= url('products/store') ?>" enctype="multipart/form-data" id="productForm">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="flex justify-end space-x-3 pt-6 border-t">
-                        <a href="/products" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
+                        <a href="<?= url('products') ?>" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
                         <button type="submit" class="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg hover:from-orange-600 shadow-sm">
                             Save Product
                         </button>

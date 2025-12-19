@@ -30,7 +30,7 @@ class PaymentController {
      * Route: POST /payments/record/{orderId}
      */
     public function recordPayment($orderId) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/orders/view/' . $orderId);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('orders/view/' . $orderId);
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -40,7 +40,7 @@ class PaymentController {
             $order = $this->orderModel->find($orderId);
             if (!$order) {
                 Flash::error('Order not found.');
-                return $this->redirect('/orders');
+                return $this->redirect('orders');
             }
             
             $amount = (float)($_POST['amount'] ?? 0);
@@ -71,12 +71,12 @@ class PaymentController {
             $this->orderModel->update($orderId, ['status' => $newStatus]);
             
             Flash::success("Payment of " . format_currency($amount) . " recorded successfully. Order status updated to '{$newStatus}'.");
-            $this->redirect('/orders/view/' . $orderId); // Assumes an order view route exists
+            $this->redirect('orders/view/' . $orderId); // Assumes an order view route exists
             
         } catch (Exception $e) {
             error_log("Payment record error: " . $e->getMessage());
             Flash::error('Error recording payment: ' . $e->getMessage());
-            $this->redirect('/orders/view/' . $orderId);
+            $this->redirect('orders/view/' . $orderId);
         }
     }
     
@@ -88,8 +88,8 @@ class PaymentController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

@@ -8,7 +8,7 @@
                 </div>
                 
                 <div class="flex items-center space-x-3 ml-4">
-                    <a href="/products/create" 
+                    <a href="<?= url('products/create') ?>" 
                        class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-sm transition-all duration-200">
                         <i class="fas fa-plus mr-2"></i>
                         <span class="hidden sm:inline">Add Product</span>
@@ -77,7 +77,7 @@
             </div>
             
             <div id="filterContainer" class="hidden md:block">
-                <form method="GET" action="/products" class="space-y-4">
+                <form method="GET" action="<?= url('products') ?>" class="space-y-4">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
@@ -123,7 +123,7 @@
                                 <i class="fas fa-filter mr-2"></i> Apply Filters
                             </button>
                             <?php if ($search || $selected_category || $selected_stock_filter): ?>
-                            <a href="/products" class="mt-2 sm:mt-0 sm:ml-3 block sm:inline-block text-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm">
+                            <a href="<?= url('products') ?>" class="mt-2 sm:mt-0 sm:ml-3 block sm:inline-block text-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm">
                                 Clear
                             </a>
                             <?php endif; ?>
@@ -196,7 +196,7 @@
                                                 <i class="fas fa-box"></i>
                                             </button>
                                             
-                                            <a href="/products/edit/<?= $product['id'] ?>" class="text-blue-600 hover:text-blue-900">
+                                            <a href="<?= url('products/edit/<?= $product['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             
@@ -208,7 +208,7 @@
                                         </div>
                                         
                                         <form id="delete-form-<?= $product['id'] ?>" 
-                                              action="/products/delete/<?= $product['id'] ?>" 
+                                              action="<?= url('products/delete/<?= $product['id'] ?>') ?>" 
                                               method="POST" 
                                               class="hidden">
                                             <?= CSRF::getTokenField() ?>

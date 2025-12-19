@@ -42,7 +42,7 @@ class OrderController {
         $order = $this->orderModel->find($id);
         if (!$order) {
             Flash::error("Order not found");
-            return $this->redirect('/orders');
+            return $this->redirect('orders');
         }
 
         $items = $this->orderModel->getItems($id);
@@ -71,7 +71,7 @@ class OrderController {
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
         }
-        $this->redirect('/orders');
+        $this->redirect('orders');
     }
 
     public function create() {
@@ -89,7 +89,7 @@ class OrderController {
      * Store Order with Stock Management & Seat Number
      */
     public function store() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/orders/create');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('orders/create');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) throw new Exception('Invalid CSRF token');
@@ -135,12 +135,12 @@ class OrderController {
             }
 
             Flash::success("Order created successfully!");
-            $this->redirect('/orders/view/' . $orderId);
+            $this->redirect('orders/view/' . $orderId);
 
         } catch (Exception $e) {
             Flash::error($e->getMessage());
             $_SESSION['old_input'] = $_POST;
-            $this->redirect('/orders/create');
+            $this->redirect('orders/create');
         }
     }
 
@@ -148,7 +148,7 @@ class OrderController {
         $order = $this->orderModel->find($id);
         if (!$order) {
             Flash::error("Order not found");
-            return $this->redirect('/orders');
+            return $this->redirect('orders');
         }
 
         $orderItems = $this->orderModel->getItems($id);
@@ -168,7 +168,7 @@ class OrderController {
      * Update Order with Stock Restoration
      */
     public function update($id) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/orders/edit/' . $id);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('orders/edit/' . $id);
 
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) throw new Exception('Invalid CSRF token');
@@ -227,11 +227,11 @@ class OrderController {
             }
 
             Flash::success("Order updated successfully!");
-            $this->redirect('/orders/view/' . $id);
+            $this->redirect('orders/view/' . $id);
 
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/orders/edit/' . $id);
+            $this->redirect('orders/edit/' . $id);
         }
     }
 
@@ -249,7 +249,7 @@ class OrderController {
             $this->orderModel->delete($id);
             Flash::success("Order deleted and stock restored.");
         }
-        $this->redirect('/orders');
+        $this->redirect('orders');
     }
 
     private function processItems($rawItems) {
@@ -285,8 +285,8 @@ class OrderController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

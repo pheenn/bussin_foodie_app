@@ -2,7 +2,7 @@
     <header class="bg-white shadow md:shadow-sm sticky top-0 z-20">
         <div class="px-4 py-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
             <div class="flex items-center gap-3">
-                <a href="/orders" class="text-gray-500 hover:text-gray-700"><i class="fas fa-arrow-left"></i></a>
+                <a href="<?= url('orders') ?>" class="text-gray-500 hover:text-gray-700"><i class="fas fa-arrow-left"></i></a>
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900"><?= e($order['order_number']) ?></h1>
                     <p class="text-sm text-gray-500"><?= date('F j, Y g:i A', strtotime($order['created_at'])) ?></p>
@@ -10,7 +10,7 @@
             </div>
             
             <div class="flex gap-2">
-                <form action="/orders/update-status" method="POST" class="inline-flex">
+                <form action="<?= url('orders/update-status') ?>" method="POST" class="inline-flex">
                     <?= CSRF::getTokenField() ?>
                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                     
@@ -28,7 +28,7 @@
                         <button name="status" value="cancelled" class="ml-2 px-4 py-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-50" onclick="return confirm('Cancel this order?')">Cancel</button>
                     <?php endif; ?>
                 </form>
-                <a href="/orders/edit/<?= $order['id'] ?>" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                <a href="<?= url('orders/edit/<?= $order['id'] ?>') ?>" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
                     <i class="fas fa-edit mr-2"></i> Edit
                 </a>
             </div>
@@ -101,7 +101,7 @@
                     </div>
 
                     <?php if ($balance > 0 && $order['status'] != 'cancelled'): ?>
-                    <form action="/payments/record/<?= $order['id'] ?>" method="POST" class="mb-6 bg-gray-50 p-4 rounded-lg border">
+                    <form action="<?= url('payments/record/<?= $order['id'] ?>') ?>" method="POST" class="mb-6 bg-gray-50 p-4 rounded-lg border">
                         <?= CSRF::getTokenField() ?>
                         <h4 class="text-sm font-bold text-gray-700 mb-3">Record New Payment</h4>
                         
@@ -201,7 +201,7 @@
                     </div>
                     
                     <div class="mt-6 pt-4 border-t">
-                        <a href="/customers/edit/<?= $order['customer_id'] ?? '#' ?>" class="w-full block text-center px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+                        <a href="<?= url('customers/edit/<?= $order['customer_id'] ?? '#' ?>') ?>" class="w-full block text-center px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
                             View Customer Profile
                         </a>
                     </div>

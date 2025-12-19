@@ -7,7 +7,7 @@
     
     <div class="px-4 py-6 max-w-3xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="/users/update/<?= $user['id'] ?>">
+            <form method="POST" action="<?= url('users/update/<?= $user['id'] ?>') ?>">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="flex justify-end space-x-3 pt-4 border-t">
-                        <a href="/users" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
+                        <a href="<?= url('users') ?>" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
                         <button type="submit" class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Update User</button>
                     </div>
                 </div>

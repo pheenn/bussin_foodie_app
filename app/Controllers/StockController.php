@@ -17,7 +17,7 @@ class StockController {
      */
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/products');
+            $this->redirect('products');
             return;
         }
         
@@ -25,7 +25,7 @@ class StockController {
             // Validate CSRF token
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
                 Flash::error('Invalid CSRF token');
-                $this->redirect('/products');
+                $this->redirect('products');
                 return;
             }
             
@@ -33,7 +33,7 @@ class StockController {
             $product = $this->productModel->find($id);
             if (!$product) {
                 Flash::error('Product not found');
-                $this->redirect('/products');
+                $this->redirect('products');
                 return;
             }
             
@@ -71,11 +71,11 @@ class StockController {
             Flash::error('Error updating stock: ' . $e->getMessage());
         }
         
-        $this->redirect('/products');
+        $this->redirect('products');
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

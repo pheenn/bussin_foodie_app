@@ -8,7 +8,7 @@
     
     <div class="px-4 py-6 max-w-3xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="/settings/update">
+            <form method="POST" action="<?= url('settings/update') ?>">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-8">

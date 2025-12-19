@@ -7,7 +7,7 @@
                     <p class="hidden md:block mt-1 text-sm text-gray-600">Manage system administrators and staff access</p>
                 </div>
                 <div class="flex items-center space-x-3 ml-4">
-                    <a href="/users/create" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-red-600 shadow-sm transition-all duration-200">
+                    <a href="<?= url('users/create') ?>" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-red-600 shadow-sm transition-all duration-200">
                         <i class="fas fa-plus mr-2"></i> Add User
                     </a>
                 </div>
@@ -55,13 +55,13 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <a href="/users/edit/<?= $u['id'] ?>" class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></a>
+                                    <a href="<?= url('users/edit/<?= $u['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></a>
                                     
                                     <?php if ($u['id'] != $_SESSION['admin_id']): ?>
                                         <button onclick="confirmDeleteUser(<?= $u['id'] ?>, '<?= e($u['username']) ?>')" class="text-red-600 hover:text-red-900">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <form id="delete-user-<?= $u['id'] ?>" action="/users/delete/<?= $u['id'] ?>" method="POST" class="hidden">
+                                        <form id="delete-user-<?= $u['id'] ?>" action="<?= url('users/delete/<?= $u['id'] ?>') ?>" method="POST" class="hidden">
                                             <?= CSRF::getTokenField() ?>
                                         </form>
                                     <?php endif; ?>

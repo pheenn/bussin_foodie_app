@@ -15,10 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="<?= url('css/tailwind.css') ?>">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="<?= url('assets/favicon.ico') ?>">
     
     <style>
         /* Prevent body scroll when sidebar is open on mobile */

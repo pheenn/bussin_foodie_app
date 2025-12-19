@@ -2,7 +2,7 @@
     <header class="bg-white shadow md:shadow-sm sticky top-0 z-20">
         <div class="px-4 py-4 flex justify-between items-center">
             <h1 class="pl-16 text-2xl font-bold text-gray-900">Orders</h1>
-            <a href="/orders/create" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg hover:from-orange-600 shadow-sm transition-all">
+            <a href="<?= url('orders/create') ?>" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg hover:from-orange-600 shadow-sm transition-all">
                 <i class="fas fa-plus mr-2"></i> New Order
             </a>
         </div>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
-            <form method="GET" action="/orders" class="flex flex-col md:flex-row gap-4">
+            <form method="GET" action="<?= url('orders') ?>" class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1">
                     <input type="text" name="search" value="<?= e($search) ?>" placeholder="Search Order # or Customer..." 
                            class="w-full px-4 py-2 border rounded-lg focus:ring-orange-500">
@@ -66,7 +66,7 @@
                         <?php foreach ($orders as $order): ?>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 font-medium text-orange-600">
-                                <a href="/orders/view/<?= $order['id'] ?>"><?= e($order['order_number']) ?></a>
+                                <a href="<?= url('orders/view/<?= $order['id'] ?>') ?>"><?= e($order['order_number']) ?></a>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm font-medium text-gray-900"><?= e($order['linked_customer_name'] ?? $order['customer_name']) ?></div>
@@ -84,10 +84,10 @@
                                 <?= date('M j, H:i', strtotime($order['created_at'])) ?>
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
-                                <a href="/orders/edit/<?= $order['id'] ?>" class="text-blue-600 hover:text-blue-800" title="Edit">
+                                <a href="<?= url('orders/edit/<?= $order['id'] ?>') ?>" class="text-blue-600 hover:text-blue-800" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="/orders/view/<?= $order['id'] ?>" class="text-gray-400 hover:text-gray-600" title="View">
+                                <a href="<?= url('orders/view/<?= $order['id'] ?>') ?>" class="text-gray-400 hover:text-gray-600" title="View">
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </td>

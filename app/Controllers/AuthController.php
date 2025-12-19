@@ -12,7 +12,7 @@ class AuthController {
         
         // If already logged in, redirect to dashboard
         if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-            header('Location: /dashboard');
+            header('Location: ' . url('dashboard'));
             exit;
         }
         
@@ -23,7 +23,7 @@ class AuthController {
             
             if (Auth::login($username, $password)) {
                 Flash::success('Welcome back!');
-                header('Location: /dashboard');
+                header('Location: ' . url('dashboard'));
                 exit;
             } else {
                 Flash::error('Invalid username or password. Try: admin / admin123');
@@ -37,7 +37,7 @@ class AuthController {
     public function logout() {
         Auth::logout();
         Flash::info('You have been logged out.');
-        header('Location: /login');
+        header('Location: ' . url('login'));
         exit;
     }
     
@@ -79,7 +79,7 @@ class AuthController {
                     <p class="mt-2 text-gray-600">Admin Dashboard Login</p>
                 </div>
                 
-                <form class="mt-8 space-y-6" method="POST" action="/login">
+                <form class="mt-8 space-y-6" method="POST" action="<?= url('login') ?>">
                     <?= CSRF::getTokenField() ?>
                     
                     <div class="space-y-4">
