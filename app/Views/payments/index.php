@@ -33,7 +33,7 @@
                                     #<?= e($payment['id']) ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-800">
-                                    <a href="<?= url('orders/view/<?= e($payment['order_id']) ?>') ?>" class="underline">
+                                    <a href="<?= url('orders/view/' . e($payment['order_id'])) ?>" class="underline">
                                         Order #<?= e($payment['order_id']) ?> (<?= e($payment['customer_name']) ?>)
                                     </a>
                                 </td>

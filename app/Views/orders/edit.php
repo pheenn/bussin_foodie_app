@@ -7,7 +7,7 @@
     </header>
     
     <div class="px-4 py-6 max-w-5xl mx-auto">
-        <form method="POST" action="<?= url('orders/update/<?= $order['id'] ?>') ?>">
+        <form method="POST" action="<?= url('orders/update/' . $order['id']) ?>">
             <?= CSRF::getTokenField() ?>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -111,7 +111,7 @@
             </div>
         </form>
         
-        <form id="deleteForm" action="<?= url('orders/delete/<?= $order['id'] ?>') ?>" method="POST" class="hidden">
+        <form id="deleteForm" action="<?= url('orders/delete/' . $order['id']) ?>" method="POST" class="hidden">
             <?= CSRF::getTokenField() ?>
         </form>
     </div>

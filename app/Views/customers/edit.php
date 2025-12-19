@@ -10,7 +10,7 @@
     
     <div class="px-4 py-6 max-w-3xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="<?= url('customers/update/<?= $customer['id'] ?>') ?>">
+            <form method="POST" action="<?= url('customers/update/' . $customer['id']) ?>">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">
@@ -57,7 +57,7 @@
                 </div>
             </form>
 
-            <form id="delete-customer-<?= $customer['id'] ?>" action="<?= url('customers/delete/<?= $customer['id'] ?>') ?>" method="POST" class="hidden">
+            <form id="delete-customer-<?= $customer['id'] ?>" action="<?= url('customers/delete/' . $customer['id']) ?>" method="POST" class="hidden">
                 <?= CSRF::getTokenField() ?>
             </form>
         </div>

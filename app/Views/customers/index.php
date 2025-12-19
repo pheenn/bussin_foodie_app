@@ -48,12 +48,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <a href="<?= url('customers/edit/<?= $c['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="<?= url('customers/edit/' . $c['id']) ?>" class="text-blue-600 hover:text-blue-900" title="Edit"><i class="fas fa-edit"></i></a>
                                     
                                     <button onclick="confirmDeleteCustomer(<?= $c['id'] ?>, '<?= e($c['name']) ?>')" class="text-red-600 hover:text-red-900" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form id="delete-customer-<?= $c['id'] ?>" action="<?= url('customers/delete/<?= $c['id'] ?>') ?>" method="POST" class="hidden">
+                                    <form id="delete-customer-<?= $c['id'] ?>" action="<?= url('customers/delete/' . $c['id']) ?>" method="POST" class="hidden">
                                         <?= CSRF::getTokenField() ?>
                                     </form>
                                 </div>

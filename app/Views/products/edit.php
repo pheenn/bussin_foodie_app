@@ -10,7 +10,7 @@
     
     <div class="px-4 py-6 max-w-4xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="<?= url('products/update/<?= $product['id'] ?>') ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?= url('products/update/' . $product['id']) ?>" enctype="multipart/form-data">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">
@@ -97,7 +97,7 @@
                 </div>
             </form>
             
-            <form id="deleteForm" action="<?= url('products/delete/<?= $product['id'] ?>') ?>" method="POST" class="hidden">
+            <form id="deleteForm" action="<?= url('products/delete/' . $product['id']) ?>" method="POST" class="hidden">
                 <?= CSRF::getTokenField() ?>
             </form>
         </div>
