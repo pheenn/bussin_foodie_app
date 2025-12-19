@@ -70,9 +70,23 @@ function url($path = '') {
     // Remove leading slash from path if present
     $path = ltrim($path, '/');
     
-    // If path is empty, return base path
+    // If path is empty, return dashboard
     if (empty($path)) {
-        return BASE_PATH ?: '/';
+        return BASE_PATH . '/dashboard.php';
+    }
+    
+    // Check if path contains an ID pattern (e.g., products/edit/5)
+    if (preg_match('#^([^/]+/[^/]+)/(\d+)$#', $path, $matches)) {
+        // Convert products/edit/5 -> products/edit.php?id=5
+        $basePath = $matches[1];
+        $id = $matches[2];
+        return BASE_PATH . '/' . $basePath . '.php?id=' . $id;
+    }
+    
+    // Add .php extension if not present and doesn't have a query string or fragment
+    if (!preg_match('/\.(php|css|js|png|jpg|jpeg|gif|svg|ico)$/i', $path) && 
+        !preg_match('/[?#]/', $path)) {
+        $path .= '.php';
     }
     
     // Combine base path with the provided path
