@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-                            <a href="/products" class="block text-center text-orange-600 font-medium hover:text-orange-700 mt-4 transition-colors">
+                            <a href="<?= url('products') ?>" class="block text-center text-orange-600 font-medium hover:text-orange-700 mt-4 transition-colors">
                                 View All Products →
                             </a>
                         <?php else: ?>

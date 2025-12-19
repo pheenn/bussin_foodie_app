@@ -10,7 +10,7 @@
     
     <div class="px-4 py-6 max-w-4xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="/products/update/<?= $product['id'] ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?= url('products/update/<?= $product['id'] ?>') ?>" enctype="multipart/form-data">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">
@@ -88,7 +88,7 @@
                         </button>
                         
                         <div class="flex space-x-3 justify-end w-full md:w-auto">
-                            <a href="/products" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
+                            <a href="<?= url('products') ?>" class="px-6 py-2 border rounded-lg hover:bg-gray-50 text-gray-700">Cancel</a>
                             <button type="submit" class="px-6 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg hover:from-orange-600 shadow-sm">
                                 Update Product
                             </button>
@@ -97,7 +97,7 @@
                 </div>
             </form>
             
-            <form id="deleteForm" action="/products/delete/<?= $product['id'] ?>" method="POST" class="hidden">
+            <form id="deleteForm" action="<?= url('products/delete/<?= $product['id'] ?>') ?>" method="POST" class="hidden">
                 <?= CSRF::getTokenField() ?>
             </form>
         </div>

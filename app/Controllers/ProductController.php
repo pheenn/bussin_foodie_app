@@ -54,7 +54,7 @@ class ProductController {
         } catch (Exception $e) {
             error_log("Product index error: " . $e->getMessage());
             Flash::error('Error loading products: ' . $e->getMessage());
-            $this->redirect('/products');
+            $this->redirect('products');
         }
     }
     
@@ -73,12 +73,12 @@ class ProductController {
      * Store new product with Image Upload
      */
     public function store() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/products/create');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('products/create');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
                 Flash::error('Invalid CSRF token');
-                return $this->redirect('/products/create');
+                return $this->redirect('products/create');
             }
             
             // Validate basic inputs
@@ -86,7 +86,7 @@ class ProductController {
             if (!empty($errors)) {
                 foreach ($errors as $error) Flash::error($error);
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/products/create');
+                return $this->redirect('products/create');
             }
             
             // Handle Image Upload
@@ -102,7 +102,7 @@ class ProductController {
                 } catch (Exception $e) {
                     Flash::error($e->getMessage());
                     $_SESSION['old_input'] = $_POST;
-                    return $this->redirect('/products/create');
+                    return $this->redirect('products/create');
                 }
             }
             
@@ -121,13 +121,13 @@ class ProductController {
             
             $this->productModel->create($data);
             Flash::success('Product created successfully!');
-            $this->redirect('/products');
+            $this->redirect('products');
             
         } catch (Exception $e) {
             error_log("Product store error: " . $e->getMessage());
             Flash::error('Error creating product: ' . $e->getMessage());
             $_SESSION['old_input'] = $_POST;
-            $this->redirect('/products/create');
+            $this->redirect('products/create');
         }
     }
     
@@ -138,7 +138,7 @@ class ProductController {
         $product = $this->productModel->find($id);
         if (!$product) {
             Flash::error('Product not found');
-            return $this->redirect('/products');
+            return $this->redirect('products');
         }
         $categories = $this->productModel->getCategories();
         $this->render('products/edit', [
@@ -152,25 +152,25 @@ class ProductController {
      * Update existing product with Image Upload & Cleanup
      */
     public function update($id) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/products/edit/' . $id);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('products/edit/' . $id);
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
                 Flash::error('Invalid CSRF token');
-                return $this->redirect('/products/edit/' . $id);
+                return $this->redirect('products/edit/' . $id);
             }
             
             $product = $this->productModel->find($id);
             if (!$product) {
                 Flash::error('Product not found');
-                return $this->redirect('/products');
+                return $this->redirect('products');
             }
             
             // Validate input
             $errors = $this->validateProduct($_POST, $id);
             if (!empty($errors)) {
                 foreach ($errors as $error) Flash::error($error);
-                return $this->redirect('/products/edit/' . $id);
+                return $this->redirect('products/edit/' . $id);
             }
             
             // Handle Image Upload
@@ -193,7 +193,7 @@ class ProductController {
                     $imagePath = $newImagePath;
                 } catch (Exception $e) {
                     Flash::error($e->getMessage());
-                    return $this->redirect('/products/edit/' . $id);
+                    return $this->redirect('products/edit/' . $id);
                 }
             }
             
@@ -211,12 +211,12 @@ class ProductController {
             
             $this->productModel->update($id, $data);
             Flash::success('Product updated successfully!');
-            $this->redirect('/products');
+            $this->redirect('products');
             
         } catch (Exception $e) {
             error_log("Product update error: " . $e->getMessage());
             Flash::error('Error updating product: ' . $e->getMessage());
-            $this->redirect('/products/edit/' . $id);
+            $this->redirect('products/edit/' . $id);
         }
     }
     
@@ -224,12 +224,12 @@ class ProductController {
      * Delete product AND its image
      */
     public function delete($id) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/products');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('products');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
                 Flash::error('Invalid CSRF token');
-                return $this->redirect('/products');
+                return $this->redirect('products');
             }
             
             // 1. Find product to get image path
@@ -246,11 +246,11 @@ class ProductController {
                 Flash::error('Product not found');
             }
             
-            $this->redirect('/products');
+            $this->redirect('products');
             
         } catch (Exception $e) {
             Flash::error('Error deleting product: ' . $e->getMessage());
-            $this->redirect('/products');
+            $this->redirect('products');
         }
     }
     
@@ -328,8 +328,8 @@ class ProductController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

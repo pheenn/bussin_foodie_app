@@ -25,7 +25,7 @@ class UserController {
     }
     
     public function store() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/users/create');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('users/create');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -46,20 +46,20 @@ class UserController {
             if (!empty($errors)) {
                 foreach ($errors as $error) Flash::error($error);
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/users/create');
+                return $this->redirect('users/create');
             }
             
             // Check uniqueness
             if ($this->userModel->usernameExists($data['username'])) {
                 Flash::error('Username already taken');
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/users/create');
+                return $this->redirect('users/create');
             }
             
             if ($this->userModel->emailExists($data['email'])) {
                 Flash::error('Email already registered');
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/users/create');
+                return $this->redirect('users/create');
             }
             
             // Prepare for storage
@@ -74,11 +74,11 @@ class UserController {
             
             $this->userModel->create($userData);
             Flash::success('User created successfully');
-            $this->redirect('/users');
+            $this->redirect('users');
             
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/users/create');
+            $this->redirect('users/create');
         }
     }
     
@@ -86,7 +86,7 @@ class UserController {
         $user = $this->userModel->find($id);
         if (!$user) {
             Flash::error('User not found');
-            return $this->redirect('/users');
+            return $this->redirect('users');
         }
         
         $this->render('users/edit', [
@@ -96,7 +96,7 @@ class UserController {
     }
     
     public function update($id) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/users/edit/' . $id);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('users/edit/' . $id);
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -121,33 +121,33 @@ class UserController {
             // Check duplicates (excluding current user)
             if ($this->userModel->usernameExists($data['username'], $id)) {
                 Flash::error('Username already taken');
-                return $this->redirect('/users/edit/' . $id);
+                return $this->redirect('users/edit/' . $id);
             }
             if ($this->userModel->emailExists($data['email'], $id)) {
                 Flash::error('Email already taken');
-                return $this->redirect('/users/edit/' . $id);
+                return $this->redirect('users/edit/' . $id);
             }
             
             // Handle Password Update
             if (!empty($_POST['password'])) {
                 if (strlen($_POST['password']) < 6) {
                     Flash::error('Password must be at least 6 characters');
-                    return $this->redirect('/users/edit/' . $id);
+                    return $this->redirect('users/edit/' . $id);
                 }
                 if ($_POST['password'] !== $_POST['confirm_password']) {
                     Flash::error('Passwords do not match');
-                    return $this->redirect('/users/edit/' . $id);
+                    return $this->redirect('users/edit/' . $id);
                 }
                 $data['password_hash'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             }
             
             $this->userModel->update($id, $data);
             Flash::success('User updated successfully');
-            $this->redirect('/users');
+            $this->redirect('users');
             
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/users/edit/' . $id);
+            $this->redirect('users/edit/' . $id);
         }
     }
     
@@ -163,7 +163,7 @@ class UserController {
                 }
             }
         }
-        $this->redirect('/users');
+        $this->redirect('users');
     }
     
     private function validateUser($data) {
@@ -184,8 +184,8 @@ class UserController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

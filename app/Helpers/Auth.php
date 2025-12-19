@@ -73,7 +73,7 @@ class Auth {
     }
     
     public static function redirectToLogin() {
-        header('Location: /login');
+        header('Location: ' . url('login'));
         exit;
     }
     

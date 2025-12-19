@@ -7,7 +7,7 @@
                     <p class="hidden md:block mt-1 text-sm text-gray-600">View and manage customer details and profiles</p>
                 </div>
                 <div class="flex items-center space-x-3 ml-4">
-                    <a href="/customers/create" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-red-600 shadow-sm transition-all duration-200">
+                    <a href="<?= url('customers/create') ?>" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-medium rounded-lg hover:from-orange-600 hover:to-red-600 shadow-sm transition-all duration-200">
                         <i class="fas fa-plus mr-2"></i> Add Customer
                     </a>
                 </div>
@@ -48,12 +48,12 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <a href="/customers/edit/<?= $c['id'] ?>" class="text-blue-600 hover:text-blue-900" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <a href="<?= url('customers/edit/<?= $c['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900" title="Edit"><i class="fas fa-edit"></i></a>
                                     
                                     <button onclick="confirmDeleteCustomer(<?= $c['id'] ?>, '<?= e($c['name']) ?>')" class="text-red-600 hover:text-red-900" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    <form id="delete-customer-<?= $c['id'] ?>" action="/customers/delete/<?= $c['id'] ?>" method="POST" class="hidden">
+                                    <form id="delete-customer-<?= $c['id'] ?>" action="<?= url('customers/delete/<?= $c['id'] ?>') ?>" method="POST" class="hidden">
                                         <?= CSRF::getTokenField() ?>
                                     </form>
                                 </div>

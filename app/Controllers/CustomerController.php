@@ -25,7 +25,7 @@ class CustomerController {
     }
     
     public function store() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/customers/create');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('customers/create');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -39,20 +39,20 @@ class CustomerController {
             if (!empty($errors)) {
                 foreach ($errors as $error) Flash::error($error);
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/customers/create');
+                return $this->redirect('customers/create');
             }
             
             // Check uniqueness
             if ($this->customerModel->emailExists($data['email'])) {
                 Flash::error('Email address is already registered.');
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/customers/create');
+                return $this->redirect('customers/create');
             }
             
             if (!empty($data['phone']) && $this->customerModel->phoneExists($data['phone'])) {
                 Flash::error('Phone number is already registered.');
                 $_SESSION['old_input'] = $_POST;
-                return $this->redirect('/customers/create');
+                return $this->redirect('customers/create');
             }
             
             // Prepare for storage
@@ -66,11 +66,11 @@ class CustomerController {
             
             $this->customerModel->create($customerData);
             Flash::success('Customer created successfully');
-            $this->redirect('/customers');
+            $this->redirect('customers');
             
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/customers/create');
+            $this->redirect('customers/create');
         }
     }
     
@@ -78,7 +78,7 @@ class CustomerController {
         $customer = $this->customerModel->find($id);
         if (!$customer) {
             Flash::error('Customer not found');
-            return $this->redirect('/customers');
+            return $this->redirect('customers');
         }
         
         $this->render('customers/edit', [
@@ -88,7 +88,7 @@ class CustomerController {
     }
     
     public function update($id) {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/customers/edit/' . $id);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('customers/edit/' . $id);
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -104,18 +104,18 @@ class CustomerController {
             $errors = $this->validateCustomer($data, true);
             if (!empty($errors)) {
                 foreach ($errors as $error) Flash::error($error);
-                return $this->redirect('/customers/edit/' . $id);
+                return $this->redirect('customers/edit/' . $id);
             }
             
             // Check uniqueness (excluding current customer)
             if ($this->customerModel->emailExists($data['email'], $id)) {
                 Flash::error('Email address is already registered.');
-                return $this->redirect('/customers/edit/' . $id);
+                return $this->redirect('customers/edit/' . $id);
             }
             
             if (!empty($data['phone']) && $this->customerModel->phoneExists($data['phone'], $id)) {
                 Flash::error('Phone number is already registered.');
-                return $this->redirect('/customers/edit/' . $id);
+                return $this->redirect('customers/edit/' . $id);
             }
             
             $customerData = [
@@ -127,11 +127,11 @@ class CustomerController {
             
             $this->customerModel->update($id, $customerData);
             Flash::success('Customer updated successfully');
-            $this->redirect('/customers');
+            $this->redirect('customers');
             
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/customers/edit/' . $id);
+            $this->redirect('customers/edit/' . $id);
         }
     }
     
@@ -144,7 +144,7 @@ class CustomerController {
                 Flash::error('Invalid CSRF token');
             }
         }
-        $this->redirect('/customers');
+        $this->redirect('customers');
     }
     
     /**
@@ -183,8 +183,8 @@ class CustomerController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

@@ -2,7 +2,7 @@
     <div class="px-6 py-4 border-b border-gray-200">
         <div class="flex items-center justify-between">
             <h2 class="text-lg font-semibold text-gray-900">Recent Orders</h2>
-            <a href="/orders" class="text-sm text-orange-600 font-medium hover:text-orange-700">
+            <a href="<?= url('orders') ?>" class="text-sm text-orange-600 font-medium hover:text-orange-700">
                 View All →
             </a>
         </div>
@@ -24,7 +24,7 @@
                     <?php foreach ($recentOrders as $order): ?>
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="/orders/view/<?= $order['id'] ?>" class="text-sm font-medium text-orange-600 hover:text-orange-700">
+                                <a href="<?= url('orders/view/<?= $order['id'] ?>') ?>" class="text-sm font-medium text-orange-600 hover:text-orange-700">
                                     <?= e($order['order_number']) ?>
                                 </a>
                             </td>

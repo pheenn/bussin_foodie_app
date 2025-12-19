@@ -67,7 +67,7 @@
         
         <div class="flex-1 overflow-y-auto overflow-x-hidden py-2">
             <nav class="space-y-1 px-2">
-                <a href="/dashboard" 
+                <a href="<?= url('dashboard') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group <?= getLinkClass($currentUri, '/dashboard') ?>">
                     <div class="w-7 h-7 flex items-center justify-center shrink-0">
                         <i class="fas fa-tachometer-alt text-base <?= getIconClass($currentUri, '/dashboard') ?>"></i>
@@ -75,7 +75,7 @@
                     <span class="font-medium text-sm">Dashboard</span>
                 </a>
                 
-                <a href="/orders" 
+                <a href="<?= url('orders') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group <?= getLinkClass($currentUri, '/orders') ?>">
                     <div class="w-7 h-7 flex items-center justify-center relative shrink-0">
                         <i class="fas fa-shopping-cart text-base <?= getIconClass($currentUri, '/orders') ?>"></i>
@@ -87,7 +87,7 @@
                     </span>
                     <?php endif; ?>
                 </a>
-                <a href="/payments" 
+                <a href="<?= url('payments') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg
                    transition-all duration-200 group <?=
                    getLinkClass($currentUri, '/payments') ?>">
@@ -96,7 +96,7 @@
                     </div>
                     <span class="font-medium text-sm">Payments</span>
                 </a>
-                <a href="/products" 
+                <a href="<?= url('products') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group <?= getLinkClass($currentUri, '/products') ?>">
                     <div class="w-7 h-7 flex items-center justify-center relative shrink-0">
                         <i class="fas fa-hamburger text-base <?= getIconClass($currentUri, '/products') ?>"></i>
@@ -112,7 +112,7 @@
                     <?php endif; ?>
                 </a>
                 
-                <a href="/customers" 
+                <a href="<?= url('customers') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group <?= getLinkClass($currentUri, '/customers') ?>">
                     <div class="w-7 h-7 flex items-center justify-center shrink-0">
                         <i class="fas fa-users text-base <?= getIconClass($currentUri, '/customers') ?>"></i>
@@ -124,7 +124,7 @@
                     <span class="text-xs uppercase text-gray-500 tracking-wider font-semibold">System</span>
                 </div>
                 
-                <a href="/users" 
+                <a href="<?= url('users') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group <?= getLinkClass($currentUri, '/users') ?>">
                     <div class="w-7 h-7 flex items-center justify-center shrink-0">
                         <i class="fas fa-user-cog text-base <?= getIconClass($currentUri, '/users') ?>"></i>
@@ -132,7 +132,7 @@
                     <span class="font-medium text-sm">Users</span>
                 </a>
                 
-                <a href="/settings" 
+                <a href="<?= url('settings') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 group hover:bg-gray-800 hover:text-white text-gray-300">
                     <div class="w-7 h-7 flex items-center justify-center shrink-0">
                         <i class="fas fa-cog text-base text-gray-400 group-hover:text-white"></i>
@@ -140,7 +140,7 @@
                     <span class="font-medium text-sm">Settings</span>
                 </a>
                 
-                <a href="/logout" 
+                <a href="<?= url('logout') ?>" 
                    class="flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-all duration-200 hover:bg-red-900 hover:text-white text-gray-300 group mt-4 mb-2">
                     <div class="w-7 h-7 flex items-center justify-center shrink-0">
                         <i class="fas fa-sign-out-alt text-base text-gray-400 group-hover:text-white"></i>

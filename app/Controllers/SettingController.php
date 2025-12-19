@@ -22,7 +22,7 @@ class SettingController {
     }
     
     public function update() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('/settings');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') return $this->redirect('settings');
         
         try {
             if (!CSRF::validateToken($_POST['csrf_token'] ?? '')) {
@@ -42,11 +42,11 @@ class SettingController {
             $this->settingModel->updateBatch($data);
             
             Flash::success('Settings updated successfully');
-            $this->redirect('/settings');
+            $this->redirect('settings');
             
         } catch (Exception $e) {
             Flash::error($e->getMessage());
-            $this->redirect('/settings');
+            $this->redirect('settings');
         }
     }
     
@@ -58,8 +58,8 @@ class SettingController {
         require_once VIEWS_PATH . '/layouts/footer.php';
     }
     
-    private function redirect($url) {
-        header('Location: ' . $url);
+    private function redirect($path) {
+        header('Location: ' . url($path));
         exit;
     }
 }

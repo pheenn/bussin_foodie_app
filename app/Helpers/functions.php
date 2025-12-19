@@ -60,9 +60,28 @@ function get_category_color($category_id) {
     return $colors[$category_id] ?? 'bg-gray-500';
 }
 
-// Simple redirect helper
-function redirect($url) {
-    header("Location: $url");
+// Generate URL with base path for subdirectory support
+function url($path = '') {
+    // Load constants if not already loaded
+    if (!defined('BASE_PATH')) {
+        require_once dirname(__DIR__, 2) . '/config/constants.php';
+    }
+    
+    // Remove leading slash from path if present
+    $path = ltrim($path, '/');
+    
+    // If path is empty, return base path
+    if (empty($path)) {
+        return BASE_PATH ?: '/';
+    }
+    
+    // Combine base path with the provided path
+    return BASE_PATH . '/' . $path;
+}
+
+// Simple redirect helper with base path support
+function redirect($path) {
+    header("Location: " . url($path));
     exit;
 }
 
