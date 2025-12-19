@@ -7,7 +7,7 @@
     
     <div class="px-4 py-6 max-w-3xl mx-auto">
         <div class="bg-white rounded-xl shadow-sm p-6">
-            <form method="POST" action="<?= url('users/update/<?= $user['id'] ?>') ?>">
+            <form method="POST" action="<?= url('users/update/' . $user['id']) ?>">
                 <?= CSRF::getTokenField() ?>
                 
                 <div class="space-y-6">

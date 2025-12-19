@@ -196,7 +196,7 @@
                                                 <i class="fas fa-box"></i>
                                             </button>
                                             
-                                            <a href="<?= url('products/edit/<?= $product['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900">
+                                            <a href="<?= url('products/edit/' . $product['id']) ?>" class="text-blue-600 hover:text-blue-900">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             
@@ -208,7 +208,7 @@
                                         </div>
                                         
                                         <form id="delete-form-<?= $product['id'] ?>" 
-                                              action="<?= url('products/delete/<?= $product['id'] ?>') ?>" 
+                                              action="<?= url('products/delete/' . $product['id']) ?>" 
                                               method="POST" 
                                               class="hidden">
                                             <?= CSRF::getTokenField() ?>

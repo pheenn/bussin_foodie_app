@@ -55,13 +55,13 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
-                                    <a href="<?= url('users/edit/<?= $u['id'] ?>') ?>" class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></a>
+                                    <a href="<?= url('users/edit/' . $u['id']) ?>" class="text-blue-600 hover:text-blue-900"><i class="fas fa-edit"></i></a>
                                     
                                     <?php if ($u['id'] != $_SESSION['admin_id']): ?>
                                         <button onclick="confirmDeleteUser(<?= $u['id'] ?>, '<?= e($u['username']) ?>')" class="text-red-600 hover:text-red-900">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <form id="delete-user-<?= $u['id'] ?>" action="<?= url('users/delete/<?= $u['id'] ?>') ?>" method="POST" class="hidden">
+                                        <form id="delete-user-<?= $u['id'] ?>" action="<?= url('users/delete/' . $u['id']) ?>" method="POST" class="hidden">
                                             <?= CSRF::getTokenField() ?>
                                         </form>
                                     <?php endif; ?>

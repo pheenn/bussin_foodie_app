@@ -66,7 +66,7 @@
                         <?php foreach ($orders as $order): ?>
                         <tr class="hover:bg-gray-50">
                             <td class="px-6 py-4 font-medium text-orange-600">
-                                <a href="<?= url('orders/view/<?= $order['id'] ?>') ?>"><?= e($order['order_number']) ?></a>
+                                <a href="<?= url('orders/view/' . $order['id']) ?>"><?= e($order['order_number']) ?></a>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm font-medium text-gray-900"><?= e($order['linked_customer_name'] ?? $order['customer_name']) ?></div>
@@ -84,10 +84,10 @@
                                 <?= date('M j, H:i', strtotime($order['created_at'])) ?>
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
-                                <a href="<?= url('orders/edit/<?= $order['id'] ?>') ?>" class="text-blue-600 hover:text-blue-800" title="Edit">
+                                <a href="<?= url('orders/edit/' . $order['id']) ?>" class="text-blue-600 hover:text-blue-800" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="<?= url('orders/view/<?= $order['id'] ?>') ?>" class="text-gray-400 hover:text-gray-600" title="View">
+                                <a href="<?= url('orders/view/' . $order['id']) ?>" class="text-gray-400 hover:text-gray-600" title="View">
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </td>

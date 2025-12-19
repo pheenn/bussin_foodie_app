@@ -28,7 +28,7 @@
                         <button name="status" value="cancelled" class="ml-2 px-4 py-2 border border-red-200 text-red-600 rounded-lg hover:bg-red-50" onclick="return confirm('Cancel this order?')">Cancel</button>
                     <?php endif; ?>
                 </form>
-                <a href="<?= url('orders/edit/<?= $order['id'] ?>') ?>" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                <a href="<?= url('orders/edit/' . $order['id']) ?>" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
                     <i class="fas fa-edit mr-2"></i> Edit
                 </a>
             </div>
@@ -101,7 +101,7 @@
                     </div>
 
                     <?php if ($balance > 0 && $order['status'] != 'cancelled'): ?>
-                    <form action="<?= url('payments/record/<?= $order['id'] ?>') ?>" method="POST" class="mb-6 bg-gray-50 p-4 rounded-lg border">
+                    <form action="<?= url('payments/record/' . $order['id']) ?>" method="POST" class="mb-6 bg-gray-50 p-4 rounded-lg border">
                         <?= CSRF::getTokenField() ?>
                         <h4 class="text-sm font-bold text-gray-700 mb-3">Record New Payment</h4>
                         
@@ -201,7 +201,7 @@
                     </div>
                     
                     <div class="mt-6 pt-4 border-t">
-                        <a href="<?= url('customers/edit/<?= $order['customer_id'] ?? '#' ?>') ?>" class="w-full block text-center px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
+                        <a href="<?= url('customers/edit/' . ($order['customer_id'] ?? '#')) ?>" class="w-full block text-center px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
                             View Customer Profile
                         </a>
                     </div>
