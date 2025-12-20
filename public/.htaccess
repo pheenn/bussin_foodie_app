@@ -2,10 +2,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # If the requested file or directory doesn't exist, redirect to index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php [QSA,L]
+    # Redirect root to dashboard
+    RewriteRule ^$ dashboard.php [L]
 </IfModule>
 
 # Security headers

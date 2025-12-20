@@ -8,10 +8,12 @@
     function getLinkClass($uri, $path) {
         $isActive = false;
         if ($path === '/dashboard') {
-            $isActive = ($uri === '/dashboard' || $uri === '/' || $uri === '/index.php');
+            $isActive = ($uri === '/dashboard' || $uri === '/dashboard.php' || $uri === '/' || $uri === '/index.php');
         } else {
             // Check if current URI starts with the path (e.g. /products/create starts with /products)
-            $isActive = (strpos($uri, $path) === 0);
+            // Also handle .php extensions
+            $uriWithoutQuery = strtok($uri, '?');
+            $isActive = (strpos($uriWithoutQuery, $path) === 0 || strpos($uriWithoutQuery, $path . '.php') === 0);
         }
         
         return $isActive 
@@ -23,9 +25,10 @@
     function getIconClass($uri, $path) {
         $isActive = false;
         if ($path === '/dashboard') {
-            $isActive = ($uri === '/dashboard' || $uri === '/' || $uri === '/index.php');
+            $isActive = ($uri === '/dashboard' || $uri === '/dashboard.php' || $uri === '/' || $uri === '/index.php');
         } else {
-            $isActive = (strpos($uri, $path) === 0);
+            $uriWithoutQuery = strtok($uri, '?');
+            $isActive = (strpos($uriWithoutQuery, $path) === 0 || strpos($uriWithoutQuery, $path . '.php') === 0);
         }
         
         return $isActive 

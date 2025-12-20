@@ -260,7 +260,7 @@ function showStockModal(productId, productName, currentStock) {
         document.getElementById('stockModalTitle').textContent = 'Update Stock: ' + productName;
         document.getElementById('currentStock').value = currentStock;
         document.getElementById('newStock').value = currentStock;
-        document.getElementById('stockUpdateForm').action = '/products/update-stock/' + productId;
+        document.getElementById('stockUpdateForm').action = '<?= url('products/update-stock') ?>?id=' + productId;
         modal.classList.remove('hidden');
         modal.classList.add('flex');
     }
