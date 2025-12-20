@@ -17,15 +17,23 @@ if (!defined('APP_NAME')) {
     // we need to remove the subdirectory part and keep only up to /public
     $parts = explode('/', trim($scriptDir, '/'));
     $baseParts = [];
+    $foundPublic = false;
     foreach ($parts as $part) {
         $baseParts[] = $part;
         // Stop at 'public' directory
         if ($part === 'public') {
+            $foundPublic = true;
             break;
         }
     }
-    $basePath = count($baseParts) > 0 ? '/' . implode('/', $baseParts) : '';
-    $basePath = ($basePath === '/' || $basePath === '\\') ? '' : $basePath;
+    
+    // If 'public' was not found in the path, use the full script directory as fallback
+    if (!$foundPublic) {
+        $basePath = ($scriptDir === '/' || $scriptDir === '\\') ? '' : $scriptDir;
+    } else {
+        $basePath = count($baseParts) > 0 ? '/' . implode('/', $baseParts) : '';
+        $basePath = ($basePath === '/' || $basePath === '\\') ? '' : $basePath;
+    }
     define('BASE_PATH', $basePath);
     
     // Session settings
