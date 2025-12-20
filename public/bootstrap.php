@@ -27,7 +27,9 @@ if (!defined("VIEWS_PATH")) {
 }
 
 // Load constants
-require_once ROOT_PATH . "/config/constants.php";
+if (!defined('APP_NAME')) {
+    require_once ROOT_PATH . "/config/constants.php";
+}
 require_once APP_PATH . "/Helpers/functions.php";
 
 // Autoload

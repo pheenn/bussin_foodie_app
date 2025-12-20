@@ -63,7 +63,7 @@ function get_category_color($category_id) {
 // Generate URL with base path for subdirectory support
 function url($path = '') {
     // Load constants if not already loaded
-    if (!defined('BASE_PATH')) {
+    if (!defined('APP_NAME')) {
         require_once dirname(__DIR__, 2) . '/config/constants.php';
     }
     
