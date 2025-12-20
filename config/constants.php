@@ -9,10 +9,23 @@ if (!defined('APP_NAME')) {
     
     // Base path for URL generation (auto-detect from SCRIPT_NAME)
     // This handles subdirectory deployments like /bussin_foodie/public/
+    // Always normalize to the /public directory to avoid duplication in subdirectories
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
     $scriptDir = dirname($scriptName);
-    // Remove 'index.php' if it's in the path
-    $basePath = ($scriptDir === '/' || $scriptDir === '\\') ? '' : $scriptDir;
+    
+    // If the script is in a subdirectory of /public (e.g., /public/orders/store.php),
+    // we need to remove the subdirectory part and keep only up to /public
+    $parts = explode('/', trim($scriptDir, '/'));
+    $baseParts = [];
+    foreach ($parts as $part) {
+        $baseParts[] = $part;
+        // Stop at 'public' directory
+        if ($part === 'public') {
+            break;
+        }
+    }
+    $basePath = count($baseParts) > 0 ? '/' . implode('/', $baseParts) : '';
+    $basePath = ($basePath === '/' || $basePath === '\\') ? '' : $basePath;
     define('BASE_PATH', $basePath);
     
     // Session settings
